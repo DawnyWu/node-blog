@@ -1,18 +1,19 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var TagCategorySchema = new Schema({
-  name:{
+var BlogSchema = new Schema({
+  title:{
     type:String,
-    unique: true
-  },  //分类名称
-  desc:String   //分类描述
+  }, 
+  content:{
+    type:String,
+  }
 });
 
-var TagCategory = mongoose.model('TagCategory',TagCategorySchema);
+var Blog = mongoose.model('Blog', BlogSchema);
 
 var Promise = require('bluebird');
-Promise.promisifyAll(TagCategory);
-Promise.promisifyAll(TagCategory.prototype);
+Promise.promisifyAll(Blog);
+Promise.promisifyAll(Blog.prototype);
 
-module.exports = TagCategory;
+module.exports = Blog;
