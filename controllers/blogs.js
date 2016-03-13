@@ -6,6 +6,7 @@ var flash = require('connect-flash');
 
 exports.index = function (req, res) {
   console.log(req.user)
+  console.log(req.session)
   Blog.find({}).then(function (blogs) {
     res.render("blogs/index", {blogs: blogs, info: req.flash('info')})
   })

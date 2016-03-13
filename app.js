@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose')
 var expressLayouts = require('express-ejs-layouts')
 var session = require('express-session')
+var MongoStore = require('connect-mongo')(session);
 var flash = require('connect-flash');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -35,7 +36,10 @@ app.use(expressLayouts)
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 1000*60*5 }}))
+app.use(session({ secret: 'keyboard cat', 
+                  cookie: { maxAge: 1000*60*60*24 },
+                  store: new MongoStore({ mongooseConnection: mongoose.connection })
+                 }))
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
