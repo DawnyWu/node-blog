@@ -6,10 +6,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose')
 var expressLayouts = require('express-ejs-layouts')
+var session = require('express-session')
+var flash = require('connect-flash');
+
 var webRouter = require('./web_router');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var Blog = require('./models/blog')
 
 var app = express();
 
@@ -26,8 +30,10 @@ app.use(expressLayouts)
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(flash());
 
 app.use('/', webRouter);
 
