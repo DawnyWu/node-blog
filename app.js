@@ -12,6 +12,8 @@ var flash = require('connect-flash');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
+var sessions = require('./controllers/sessions')
+
 var webRouter = require('./web_router');
 
 var routes = require('./routes/index');
@@ -50,6 +52,8 @@ passport.use(new LocalStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+app.use(sessions.current_user);
 
 app.use('/', webRouter);
 

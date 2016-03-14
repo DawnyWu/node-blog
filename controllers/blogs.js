@@ -7,6 +7,7 @@ var flash = require('connect-flash');
 exports.index = function (req, res) {
   console.log(req.user)
   console.log(req.session)
+  // res.locals.current_user = "hello"
   Blog.find({}).then(function (blogs) {
     res.render("blogs/index", {blogs: blogs, info: req.flash('info')})
   })
@@ -25,6 +26,5 @@ exports.create = function (req, res) {
       res.redirect('/')
     }
   )
-  
-  // res.render("sessions/new")
 }
+

@@ -30,3 +30,10 @@ exports.showLogin = function (req, res) {
 exports.login = function (req, res, next) {
   res.redirect('/');
 }
+
+exports.current_user = function (req, res, next) {
+  // res.locals.current_user = null
+  // console.log('user:  ' + req.user)
+  res.locals.current_user = req.user
+  next()
+}
