@@ -10,6 +10,11 @@ var BlogSchema = new Schema({
   }
 });
 
+BlogSchema.static('findByPage', function (pageNumber, callback) {
+  var perPage = 4
+  return this.find({}).skip(pageNumber*perPage).limit(perPage).then(callback)
+});
+
 var Blog = mongoose.model('Blog', BlogSchema);
 
 var Promise = require('bluebird');

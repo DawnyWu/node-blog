@@ -1,6 +1,11 @@
 <% include ../shared/flash %>
+
 <% blogs.forEach(function (blog, index) { %>
- <%= index %>
+ <%= blog.id %>
  <%= blog.title %>
  <div class="well"><%= blog.content %></div>
 <% })%>
+current_page: <%= currentPage %>
+<% include ../shared/pagination %> 
+
+

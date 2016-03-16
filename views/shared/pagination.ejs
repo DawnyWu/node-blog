@@ -1,0 +1,22 @@
+<nav>
+  <ul class="pagination">
+    <!-- class="disabled" -->
+    <!-- class="active" -->
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <!-- current_page -->
+    <% for(var i=1; i< pagesCount; i++) { %>
+    <li class="<%= i === currentPage ? "active" : "" %>">
+      <a href="/blogs?page=<%= i %>"><%= i %></a>
+    </li>
+    <% } %>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>

@@ -26,7 +26,8 @@ router.get('/logout', function(req, res) {
 //   }
 // );
 
-router.get('/', blogs.index)
+router.get('/', blogs.pagination, blogs.index)
+router.get('/blogs', blogs.pagination, blogs.blogs)
 router.get('/blogs/new', blogs.new)
 router.post('/blogs/create', blogs.create)
 
