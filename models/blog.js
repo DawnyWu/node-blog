@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var nconf = require('nconf')
 
 var BlogSchema = new Schema({
   title:{
@@ -11,7 +12,7 @@ var BlogSchema = new Schema({
 });
 
 BlogSchema.static('findByPage', function (pageNumber, callback) {
-  var perPage = 4
+  var perPage = nconf.get('perPage')
   return this.find({}).skip(pageNumber*perPage).limit(perPage).then(callback)
 });
 

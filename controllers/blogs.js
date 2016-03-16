@@ -1,5 +1,6 @@
 var mongoose = require('mongoose')
 var Blog =  require('../models/blog')
+var nconf = require('nconf')
 // var Blog = mongoose.model('blog')
 var flash = require('connect-flash');
 
@@ -30,19 +31,14 @@ exports.create = function (req, res) {
 
 exports.blogs = function (req, res) {
   var pageNumber = req.query.page
-  var perPage = 4
-
-  // Blog.find({}).skip(page*perPage).limit(perPage).then(function (blogs) {
-  //   res.render("blogs/index", {blogs: blogs, info: ""})
-  // })
+  console.log(nconf.get('perPage'))
   Blog.findByPage(pageNumber).then(function (blogs) {
     res.render("blogs/index", {blogs: blogs, info: ""})
   })
 }
 
 exports.pagination = function (req, res, next) {
-  var perPage = 4
-  var pagesCount
+  var perPage = nconf.get('perPage')
 
   Blog.countAsync({}).then(function (count) {
     var pagesCount = Math.ceil(count/perPage)

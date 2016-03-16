@@ -11,6 +11,8 @@ var MongoStore = require('connect-mongo')(session);
 var flash = require('connect-flash');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var nconf = require('nconf');
+
 
 var sessions = require('./controllers/sessions')
 
@@ -23,6 +25,7 @@ var User = require('./models/user');
 
 var app = express();
 
+nconf.file({ file: './config.json' });
 mongoose.connect('mongodb://localhost/test')
 
 // view engine setup
